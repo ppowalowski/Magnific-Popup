@@ -22,6 +22,8 @@ $.magnificPopup.registerModule('gallery', {
 		preload: [0,2],
 		navigateByImgClick: true,
 		arrows: true,
+        changeClassNext:"mfpChangeNext",
+        changeClassPrev:"mfpChangePrev",
 
 		tPrev: 'Previous (Left arrow key)',
 		tNext: 'Next (Right arrow key)',
@@ -121,16 +123,21 @@ $.magnificPopup.registerModule('gallery', {
 		}, 
 		next: function() {
 			mfp.direction = true;
+            if(mfp.st.addChangeClass)
+                mfp.changeClass = mfp.st.gallery.changeClassNext;
 			mfp.index = _getLoopedId(mfp.index + 1);
 			mfp.updateItemHTML();
 		},
 		prev: function() {
 			mfp.direction = false;
+            if(mfp.st.addChangeClass)
+                mfp.changeClass = mfp.st.gallery.changeClassPrev;
 			mfp.index = _getLoopedId(mfp.index - 1);
 			mfp.updateItemHTML();
 		},
 		goTo: function(newIndex) {
 			mfp.direction = (newIndex >= mfp.index);
+            mfp.changeClass= mfp.st.defaultChangeClass;
 			mfp.index = newIndex;
 			mfp.updateItemHTML();
 		},

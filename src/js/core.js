@@ -141,7 +141,6 @@ MagnificPopup.prototype = {
 	open: function(data) {
 
 		var i;
-
 		if(data.isObj === false) { 
 			// convert jQuery collection to array to avoid conflicts later
 			mfp.items = data.items.toArray();
@@ -191,7 +190,10 @@ MagnificPopup.prototype = {
 
 		mfp.st = $.extend(true, {}, $.magnificPopup.defaults, data ); 
 		mfp.fixedContentPos = mfp.st.fixedContentPos === 'auto' ? !mfp.probablyMobile : mfp.st.fixedContentPos;
-
+        
+        if(mfp.st.addChangeClass)
+            mfp.changeClass = mfp.st.defaultChangeClass;
+        
 		if(mfp.st.modal) {
 			mfp.st.closeOnContentClick = false;
 			mfp.st.closeOnBgClick = false;
@@ -318,7 +320,6 @@ MagnificPopup.prototype = {
 				$('body, html').css('overflow', 'hidden');
 			}
 		}
-
 		
 		
 		var classesToadd = mfp.st.mainClass;
@@ -851,6 +852,10 @@ $.magnificPopup = {
 		// http://dimsemenov.com/plugins/magnific-popup/documentation.html#options
 		
 		disableOn: 0,	
+        
+        addChangeClass: true,
+        
+        defaultChangeClass: "mfpChangeFade",
 
 		key: null,
 
